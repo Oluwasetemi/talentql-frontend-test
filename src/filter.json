@@ -1,0 +1,41 @@
+{
+	"shapes": ["Oval", "Round", "Triangle", "Square", "Rectangle"],
+	"colors": [
+		{
+			"color": "#ee302a",
+			"checked": true,
+			"isFixed": false,
+			"name": "red"
+		},
+		{
+			"color": "#1d00ff",
+			"checked": true,
+			"isFixed": false,
+			"name": "blue"
+		},
+		{
+			"color": "#008001",
+			"checked": true,
+			"isFixed": false,
+			"name": "green"
+		},
+		{
+			"color": "#feff00",
+			"checked": true,
+			"isFixed": false,
+			"name": "yellow"
+		},
+		{
+			"color": "#b3cbfb",
+			"checked": true,
+			"isFixed": false,
+			"name": "light-blue"
+		},
+		{
+			"color": "#999999",
+			"checked": true,
+			"isFixed": false,
+			"name": "gray"
+		}
+	]
+}
