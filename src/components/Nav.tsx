@@ -6,15 +6,12 @@ import logout from '../logout.svg';
 
 export const NavBar = styled.header`
 	background: #fff;
-	width: 1200px;
+	width: 85%;
 	margin: 0 auto;
-	display: grid;
-	grid-template-columns: 1fr 1fr;
-	gap: clamp(500px, 40vw, 600px);
-	justify-items: start;
-	align-content: center;
-
-	height: 60px;
+	display: flex;
+    justify-content: space-between;
+    align-items: center;
+	height: 45px;
 	span {
 		display: flex;
 	}

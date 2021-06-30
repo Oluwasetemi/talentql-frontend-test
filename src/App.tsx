@@ -4,7 +4,7 @@ import {
   Switch
 } from 'react-router-dom';
 import styled from 'styled-components';
-import Home from './components/Home';
+import ColorDashboard from './components/Home';
 import { Login } from './components/Login';
 import { ProvideAuth } from './context/authContext';
 import { useAuth } from './hooks/useAuth';
@@ -47,20 +47,22 @@ function PrivateRoute({ children, ...rest }: any) {
   );
 }
 
-const router: React.ReactNode = (): React.ReactElement => (
-  <ProvideAuth>
-    <Router>
-      <Switch>
-        <Route path="/login">
-          <Login />
-        </Route>
-        <PrivateRoute path="/">
-          <Home />
-        </PrivateRoute>
-      </Switch>
-    </Router>
-  </ProvideAuth>
-);
+const router: () => any = (): any => {
+  return (
+    <ProvideAuth>
+      <Router>
+        <Switch>
+          <Route path="/login">
+            <Login />
+          </Route>
+          <PrivateRoute path="/">
+            <ColorDashboard />
+          </PrivateRoute>
+        </Switch>
+      </Router>
+    </ProvideAuth>
+  );
+};
 
 export interface IColors {
   color: string,
@@ -81,11 +83,11 @@ export interface Filter {
 }
 
 export const AppWrapper = styled.div`
-  width: 1200px;
-  margin: 0 auto;
+  width: 85%;
+  margin: auto;
 `;
 
-function App() {
+function App(): React.ReactElement<any> {
   return router();
 }
 

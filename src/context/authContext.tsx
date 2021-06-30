@@ -11,7 +11,7 @@ export const authContext = React.createContext<AppContextInterface | null>(
 	null,
 );
 
-export function ProvideAuth({ children }: { children: React.ReactChildren }) {
+export function ProvideAuth({ children }: { children: React.ReactNode }) {
 	const auth = useProvideAuth();
 	return (
 		<authContext.Provider value={auth} >

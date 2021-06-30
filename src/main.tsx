@@ -31,6 +31,10 @@ code {
 .App-body {
   background-color: #f5f6fb;
   padding-top: 10px;
+  min-height: 100vh;
+}
+.App-body .blue-text{
+  color: #81a8f9;
 }
 
 .App-logo {
@@ -72,11 +76,16 @@ button {
   font-size: calc(10px + 2vmin);
 }
 
-.circle {
-  width: 80px;
-  height: 80px;
-  border-radius: 50%;
-}
+  .circle {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+  }
+
+  .current {
+    border: 1px solid #b3cbfb;
+    background-color: #81a8f9
+  }
 `;
 
 ReactDOM.render(
