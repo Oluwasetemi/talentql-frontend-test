@@ -57,23 +57,11 @@ export function OvalShape({ color }: { color: string, }) {
   );
 }
 
-export function ShapesFilter({ shapes, setShape, selectedShapes, setSelectedShapes }: { shapes: Array<string>, setShape: (s: string) => void, selectedShapes: string[], setSelectedShapes: React.Dispatch<React.SetStateAction<string[]>> }) {
+export function ShapesFilter({ shapes, selectedShapes, setSelectedShapes }: { shapes: Array<string>, selectedShapes: string[], setSelectedShapes: React.Dispatch<React.SetStateAction<string[]>> }) {
   // const [isActive, setActive] = React.useState(false);
 
   function isChecked(shape: string) {
     return selectedShapes.includes(shape);
-  };
-
-  const handleOnClick = (event: React.MouseEvent<HTMLButtonElement>): void => {
-    // console.log('shaped clicked', event.currentTarget.innerText);
-    const shapedClicked = event.currentTarget.innerText;
-    // loop thru all the parent and remove current
-    /* tslint:disable */
-    const allButtons: Element[] = [...event.currentTarget.parentElement!.children];
-    // console.log(allButtons);
-    // allButtons.forEach(button => button?.classList.remove('current'));
-    // event.currentTarget.classList.toggle('current');
-    setShape(shapedClicked);
   };
 
   const handleOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -82,6 +70,7 @@ export function ShapesFilter({ shapes, setShape, selectedShapes, setSelectedShap
     // const checked = isChecked(name);
     // console.log(checked);
 
+    // eslint-disable-next-line no-unused-expressions
     isChecked(name)
       ? setSelectedShapes(
         selectedShapes.filter((shape) => shape !== name),
@@ -94,8 +83,9 @@ export function ShapesFilter({ shapes, setShape, selectedShapes, setSelectedShap
 
   return (
     <ShapesContainer className="shapes">
-      {shapes.map((shape, index) => (<SingleShapeButton className={isChecked(shape) ? 'current' : ''} onClick={handleOnClick} key={index}>
+      {shapes.map((shape, index) => (<SingleShapeButton className={isChecked(shape) ? 'current' : ''} key={index}>
         <input
+          data-testid="shape-checkbox"
           type="checkbox"
           name={shape}
           id={shape}

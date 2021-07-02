@@ -24,7 +24,7 @@ export function Login(): JSX.Element {
           <AuthButton />
           <h3>Login</h3>
           <p>You must log in to view the page at {from.pathname}</p>
-          <button onClick={login}>Log in</button>
+          <button data-testid="login" onClick={login}>Log in</button>
         </AppWrapper>
       </div>
     </>

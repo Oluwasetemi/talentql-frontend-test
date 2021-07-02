@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`login component has a button log in 1`] = `
+<button
+  data-testid="login"
+>
+  Log in
+</button>
+`;

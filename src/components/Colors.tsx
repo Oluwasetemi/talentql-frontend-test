@@ -54,12 +54,10 @@ export function ColorsFilter({
   selectedColors,
   setSelectedColors,
   colorTypes,
-  setMultiple
 }: {
   selectedColors: Array<string>,
   colorTypes: Array<string>,
   setSelectedColors: (s: string[]) => void,
-  setMultiple: (s: boolean) => void,
 }) {
 
   function isChecked(color: string) {
@@ -74,19 +72,15 @@ export function ColorsFilter({
         selectedColors.filter((color) => color !== name),
       )
       : setSelectedColors([...selectedColors, name]);
-    // console.log(colorTypeState);
   };
 
-  React.useEffect(() => {
-    const isMultiple: boolean = selectedColors.length !== 1;
-    // setMultiple(isMultiple);
-  }, [selectedColors]);
 
   return (
     <ColorContainer>
       {colorTypes.map((color, index) => (
-        <ColorItem key={index} className="round" color={color}>
+        <ColorItem key={index} className="round" color={color} data-testid={color}>
           <input
+            data-testid="color-checkbox"
             type="checkbox"
             name={color}
             id={color}

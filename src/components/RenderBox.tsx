@@ -64,7 +64,7 @@ export function RenderBox({ colors, selectedShapes }: { colors: Array<string>, s
 
   return (
     <>
-      <h2>{message}</h2>
+      <h2 data-testid="message">{message}</h2>
       <BoxWrapper>
         <>
           {ovalShape()}

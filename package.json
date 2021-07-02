@@ -8,9 +8,9 @@
 		"lint:prettier": "prettier --list-different \"**/*.{js,json,ts,tsx}\"",
 		"lint:types": "tsc",
 		"lint:css": "stylelint './src/**/*.js'",
-		"lint": "yarn lint:prettier && yarn lint:eslint && yarn lint:markdown && yarn lint:types",
+		"lint": "yarn lint:prettier && yarn lint:eslint && yarn lint:types",
 		"test": "yarn lint && yarn test:unit",
-		"test:unit": "cross-env DISABLE_LOGGING=true NODE_ENV=test jest --no-watchman --maxWorkers=1 --logHeapUsage",
+		"test:unit": "jest --env=jest-environment-jsdom-sixteen",
 		"test:unit:debug": "cross-env NODE_ENV=test node --inspect-brk `which jest` --runInBand"
 	},
 	"dependencies": {
@@ -24,6 +24,11 @@
 		"styled-components": "^5.3.0"
 	},
 	"devDependencies": {
+		"@testing-library/dom": "^8.0.0",
+		"@testing-library/jest-dom": "^5.14.1",
+		"@testing-library/react": "^12.0.0",
+		"@testing-library/user-event": "^13.1.9",
+		"@types/jest": "^26.0.23",
 		"@types/react": "^17.0.0",
 		"@types/react-dom": "^17.0.0",
 		"@types/react-router-dom": "^5.1.7",
@@ -37,13 +42,17 @@
 		"eslint-plugin-jest": "^24.3.6",
 		"eslint-plugin-react": "^7.24.0",
 		"eslint-plugin-react-hooks": "^4.2.0",
-		"jest": "^27.0.5",
+		"identity-obj-proxy": "^3.0.0",
+		"jest": "23.x",
+		"jest-environment-jsdom-sixteen": "^2.0.0",
+		"jest-watch-typeahead": "^0.6.4",
 		"prettier": "^2.3.2",
 		"stylelint": "^13.13.1",
 		"stylelint-config-recommended": "^5.0.0",
 		"stylelint-config-styled-components": "^0.1.1",
 		"stylelint-processor-styled-components": "^1.10.0",
-		"typescript": "^4.3.4",
+		"ts-jest": "23.10.0",
+		"typescript": "^3.9.10",
 		"vite": "^2.3.8"
 	},
 	"name": "talentql-frontend-test",

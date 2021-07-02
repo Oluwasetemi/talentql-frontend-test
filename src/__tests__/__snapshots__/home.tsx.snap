@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Home /> home component should render a not logged in on render without auth 1`] = `
+<p>
+  You are not logged in.
+</p>
+`;
