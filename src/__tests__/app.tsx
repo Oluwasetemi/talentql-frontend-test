@@ -1,4 +1,4 @@
-import { fireEvent, render } from "@testing-library/react";
+import { cleanup, fireEvent, render } from "@testing-library/react";
 import "jest-styled-components";
 import * as React from "react";
 import App from "../App";
@@ -6,7 +6,8 @@ import { authContext } from "../context/authContext";
 import { colors, shapes } from "../filter.json";
 import { useProvideAuth } from "../hooks/useProviderAuth";
 
-// FIX: there are a lot of repition in this test. Move the repeated lines in to a function
+// FIX: there are a lot of repitition in this test. Move the repeated lines in to a function
+afterEach(() => cleanup);
 
 const mockUseLocationValue = {
   pathname: "/",
@@ -94,7 +95,72 @@ describe("<App />", () => {
     expect((await message).textContent).toBe("Multiple Items");
   });
 
-  test.skip("Deselecting the last filter should select all filter", () => {});
+  test("Deselecting the last filter should select all filter - color", async () => {
+    const {
+      getByTestId,
+      findByText,
+      findByTestId,
+      getAllByTestId,
+      findAllByTestId,
+    } = render(<HomeApp />);
+    const input = getByTestId(/login/i);
+    await fireEvent.click(input);
+    await findByText(/welcome/i, { selector: "p" });
+    const message = findByTestId(/message/i);
+    expect((await message).textContent).toEqual("All Items");
+    // single color
+    let colorCheckBox = getAllByTestId(/color-checkbox/i);
+    expect(colorCheckBox.length).toEqual(colors.length);
+    // check everything but the last one
+    colorCheckBox.slice(1).forEach(async (each) => {
+      await fireEvent.click(each as HTMLElement);
+    });
+
+    fireEvent.click(colorCheckBox[0]);
+
+    colorCheckBox = await findAllByTestId(/color-checkbox/i);
+
+    let allSelectedAgain = colorCheckBox.every((each) => {
+      let parent = each.parentElement as HTMLElement;
+      return parent?.classList.contains("current");
+    });
+
+    expect(allSelectedAgain).toEqual(true);
+  });
+
+  test("Deselecting the last filter should select all filter - shape", async () => {
+    const {
+      getByTestId,
+      findByText,
+      findByTestId,
+      getAllByTestId,
+      findAllByTestId,
+    } = render(<HomeApp />);
+    const input = getByTestId(/login/i);
+    await fireEvent.click(input);
+    await findByText(/welcome/i, { selector: "p" });
+    const message = findByTestId(/message/i);
+    expect((await message).textContent).toEqual("All Items");
+    // single color
+    let shapeCheckBox = getAllByTestId(/shape-checkbox/i);
+    expect(shapeCheckBox.length).toEqual(shapes.length);
+    // check everything but the last one
+    shapeCheckBox.slice(1).forEach(async (each) => {
+      await fireEvent.click(each.parentElement as HTMLInputElement);
+    });
+
+    const parent = shapeCheckBox[0].parentElement as HTMLElement;
+    fireEvent.click(parent);
+
+    shapeCheckBox = await findAllByTestId(/shape-checkbox/i);
+
+    let allSelectedAgain = shapeCheckBox.every((each) => {
+      let parent = each.parentElement as HTMLElement;
+      return parent?.classList.contains("current");
+    });
+
+    expect(allSelectedAgain).toBeTruthy();
+  });
 
   // gird title
   test("When all the colors and shapes are selected: “All items: ”", async () => {

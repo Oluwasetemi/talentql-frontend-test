@@ -106,6 +106,19 @@ export function ShapesFilter({ shapes, selectedShapes, setSelectedShapes }: { sh
     // console.log(selectedShapes);
   };
 
+  React.useEffect(() => {
+    if (selectedShapes.length === 1) {
+      let current = document.querySelector('button.current') as HTMLElement;
+      current?.addEventListener('click', () => {
+        setTimeout(() => {
+          setSelectedShapes(shapes);
+        }, 0);
+      }, { once: true });
+    }
+
+
+  }, [selectedShapes]);
+
 
 
   return (

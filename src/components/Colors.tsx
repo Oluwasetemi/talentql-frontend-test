@@ -13,6 +13,7 @@ export const ColorItem = styled.div`
 	border-radius: 50%;
   position: relative;
 	background-color: ${(prop) => prop.color};
+  border: 1px solid transparent;
 
   input[type="checkbox"] {
     visibility: hidden;
@@ -64,11 +65,24 @@ export function ColorsFilter({
       : setSelectedColors([...selectedColors, name]);
   };
 
+  React.useEffect(() => {
+    if (selectedColors.length === 1) {
+      let current = document.querySelector('div.current') as HTMLElement;
+      current?.addEventListener('click', () => {
+        setTimeout(() => {
+          setSelectedColors(colorTypes);
+        }, 0);
+      }, { once: true });
+    }
+
+
+  }, [selectedColors]);
+
 
   return (
     <ColorContainer>
       {colorTypes.map((color, index) => (
-        <ColorItem key={index} className="round" color={color} data-testid={color}>
+        <ColorItem key={index} className={isChecked(color) ? 'current' : ''} color={color} data-testid={color}>
           <input
             data-testid="color-checkbox"
             type="checkbox"
