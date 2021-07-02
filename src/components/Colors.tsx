@@ -74,8 +74,6 @@ export function ColorsFilter({
         }, 0);
       }, { once: true });
     }
-
-
   }, [selectedColors]);
 
 
