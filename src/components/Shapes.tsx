@@ -16,15 +16,42 @@ export const SingleShapeButton = styled.button`
   border: 1px solid grey;
   flex-direction: column;
   justify-items: center;
+  position: relative;
+  width: calc(50px + 15Vmin);
 
   :hover {
     box-shadow: 0 0 6px rgba(81, 203, 238, 1);
     background-color: #81a8f9
   }
 
+  input[type="checkbox"] {
+    visibility: hidden;
+    width:0;
+    height:100%;
+  }
 
+  input[type="checkbox"]:checked + label {
+    box-shadow: 0 0 5px rgba(81, 203, 238, 1);
+    border: 1px solid rgba(81, 203, 238, 1);
+  }
 
+  input[type="checkbox"]:checked + label:after {
+    opacity: 1;
+  }
 
+  label {
+    background-color: transparent;
+    border: 1px solid #ccc;
+    cursor: pointer;
+    padding:5px 10px;
+
+    /* height: 50px; */
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: calc(50px + 8Vmin);
+    border-radius: 15px;
+  }
 `;
 
 export function SquareShape({ color }: { color: string, }) {

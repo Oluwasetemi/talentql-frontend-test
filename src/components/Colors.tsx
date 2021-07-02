@@ -13,41 +13,31 @@ export const ColorItem = styled.div`
 	border-radius: 50%;
   position: relative;
 	background-color: ${(prop) => prop.color};
-	/* input[type='checkbox'] {
+
+  input[type="checkbox"] {
+    visibility: hidden;
+  }
+
+  input[type="checkbox"]:checked + label {
+    box-shadow: 0 0 5px rgba(81, 203, 238, 1);
+    border: 1px solid rgba(81, 203, 238, 1);
+  }
+
+  input[type="checkbox"]:checked + label:after {
+    opacity: 1;
+  }
+
+  label {
+    background-color: #fff;
+    border: 1px solid #ccc;
     border-radius: 50%;
-		width: 100%;
-    height: 100%;
-		/* height: 100%; */
-		/* margin: 0 auto; */
-		/* display: none */
-
-	/* } */
-
-input[type="checkbox"] {
-  visibility: hidden;
-}
-
-input[type="checkbox"]:checked + label {
-  box-shadow: 0 0 5px rgba(81, 203, 238, 1);
-  border: 1px solid rgba(81, 203, 238, 1);
-}
-
-input[type="checkbox"]:checked + label:after {
-  opacity: 1;
-}
-
-
-label {
-  background-color: #fff;
-  border: 1px solid #ccc;
-  border-radius: 50%;
-  cursor: pointer;
-  height: 50px;
-  left: 0;
-  position: absolute;
-  top: 0;
-  width: 50px;
-}
+    cursor: pointer;
+    height: 50px;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 50px;
+  }
 `;
 
 export function ColorsFilter({
