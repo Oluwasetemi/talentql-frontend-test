@@ -17,7 +17,7 @@ export const SingleShapeButton = styled.button`
   flex-direction: column;
   justify-items: center;
   position: relative;
-  width: 113px;
+  width: 133px;
 
   :hover {
     box-shadow: 0 0 6px rgba(81, 203, 238, 1);
@@ -49,7 +49,7 @@ export const SingleShapeButton = styled.button`
     left: 0;
     position: absolute;
     top: 0;
-    width: 90px;
+    width: 110px;
     border-radius: 15px;
   }
 `;
