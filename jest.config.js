@@ -5,4 +5,8 @@ module.exports = {
 		'^.+\\.svg$': '<rootDir>/svg-transform.js',
 	},
 	testEnvironment: 'jest-environment-jsdom-sixteen',
+	watchPlugins: [
+		'jest-watch-typeahead/filename',
+		'jest-watch-typeahead/testname',
+	],
 };

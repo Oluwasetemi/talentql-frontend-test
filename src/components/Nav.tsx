@@ -9,8 +9,8 @@ export const NavBar = styled.header`
 	width: 85%;
 	margin: 0 auto;
 	display: flex;
-    justify-content: space-between;
-    align-items: center;
+	justify-content: space-between;
+	align-items: center;
 	height: 45px;
 	span {
 		display: flex;
@@ -30,32 +30,32 @@ export const NavBar = styled.header`
 `;
 
 export function Nav() {
-  let history = useHistory();
-  let auth = useAuth();
-  let { from } = { from: { pathname: '/' } };
+	let history = useHistory();
+	let auth = useAuth();
+	let { from } = { from: { pathname: '/' } };
 
-  return (
-    <NavBar>
-      <span className="logo">Shapes</span>
-      {auth!.user ? (
-        <span
-          onClick={() => {
-            auth!.signout(() => history.push('/'));
-          }}
-          className="logout"
-        >
-          logout <img src={logout} alt="logout" />
-        </span>
-      ) : (
-        <span
-          onClick={() => {
-            auth!.signin(() => history.replace(from));
-          }}
-          className="logout"
-        >
-          login
-        </span>
-      )}
-    </NavBar>
-  );
+	return (
+		<NavBar>
+			<span className="logo">Shapes</span>
+			{auth!.user ? (
+				<span
+					onClick={() => {
+						auth!.signout(() => history.push('/'));
+					}}
+					className="logout"
+				>
+					logout <img src={logout} alt="logout" />
+				</span>
+			) : (
+				<span
+					onClick={() => {
+						auth!.signin(() => history.replace(from));
+					}}
+					className="logout"
+				>
+					login
+				</span>
+			)}
+		</NavBar>
+	);
 }

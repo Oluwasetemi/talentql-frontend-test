@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 // create global styles
 import { createGlobalStyle } from 'styled-components';
 import App from './App';
-import './index.css';
 
 const GlobalStyle = createGlobalStyle`
 body {
@@ -76,24 +75,24 @@ button {
   font-size: calc(10px + 2vmin);
 }
 
-  .circle {
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-  }
+.circle {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+}
 
-  .current {
-    border: 1px solid #b3cbfb;
-    background-color: #81a8f9
-  }
+.current {
+  border: 1px solid #b3cbfb;
+  background-color: #81a8f9
+}
 `;
 
 ReactDOM.render(
-  <React.StrictMode>
-    <React.Fragment>
-      <GlobalStyle />
-      <App />
-    </React.Fragment>
-  </React.StrictMode>,
-  document.getElementById('root'),
+	<React.StrictMode>
+		<React.Fragment>
+			<GlobalStyle />
+			<App />
+		</React.Fragment>
+	</React.StrictMode>,
+	document.getElementById('root'),
 );

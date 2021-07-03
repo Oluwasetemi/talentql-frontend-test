@@ -3,7 +3,7 @@
 		"target": "ESNext",
 		"lib": ["DOM", "DOM.Iterable", "ESNext"],
 		"allowJs": false,
-		"skipLibCheck": false,
+		"skipLibCheck": true,
 		"esModuleInterop": true,
 		"allowSyntheticDefaultImports": true,
 		"strict": true,
@@ -14,7 +14,9 @@
 		"isolatedModules": true,
 		"noEmit": true,
 		"jsx": "react",
-		"types": ["jest"]
+		"types": ["jest", "react", "react-dom", "styled-components"]
 	},
-	"include": ["./src", "svg-transform.js"]
+	"include": ["./src", "svg-transform.js"],
+	"exclude": ["node_modules/**/*.(js|ts|tsx)"],
+	"typeRoots": ["node_modules/@types"]
 }
