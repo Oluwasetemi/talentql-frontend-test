@@ -1,5 +1,7 @@
 # TalentQL Frontend Project
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/466ea786-8f8e-415b-bdd0-664ce8d9a2e0/deploy-status)](https://app.netlify.com/sites/stoic-jang-642758/deploys)
+
 [Submission URL](https://talentql-color-filter.oluwasetemi.dev/) - <https://talentql-color-filter.oluwasetemi.dev/>
 
 ## Question
