@@ -14,8 +14,10 @@
 		"test:unit:debug": "cross-env NODE_ENV=test node --inspect-brk `which jest` --runInBand"
 	},
 	"dependencies": {
+		"@reduxjs/toolkit": "^1.6.0",
 		"react": "^17.0.0",
 		"react-dom": "^17.0.0",
+		"react-redux": "^7.2.4",
 		"react-router-dom": "^5.2.0",
 		"react-select": "^4.3.1",
 		"react-shapes": "^0.1.0",
