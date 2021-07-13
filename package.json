@@ -9,7 +9,7 @@
 		"lint:types": "tsc",
 		"lint:css": "stylelint './src/**/*.(ts|tsx)'",
 		"lint": "yarn lint:prettier && yarn lint:eslint && yarn lint:types",
-		"validate": "yarn lint && test:unit && test:e2e:run",
+		"validate": "yarn lint && yarn run test:unit && yarn run test:e2e:run",
 		"test:coverage": "yarn test:unit -- --coverage",
 		"test:watch": "yarn test:unit -- --watch",
 		"test:unit": "jest",
@@ -17,7 +17,7 @@
 		"cy:run": "cypress run",
 		"cy:open": "cypress open",
 		"test:e2e": "is-ci \"test:e2e:run\" \"test:e2e:dev\"",
-		"test:e2e:run": "start-server-and-test serve http://localhost:5000 cy:run",
+		"test:e2e:run": "run-p dev cy:run",
 		"test:e2e:dev": "npm-run-all --parallel dev cy:open"
 	},
 	"dependencies": {

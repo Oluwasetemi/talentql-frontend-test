@@ -50,9 +50,10 @@ describe('functionality of the shape filter', () => {
 	it('When all the shapes and a single color is selected: “All red items:”', () => {
 		let redIndex = colors.findIndex((c) => c.name === 'red');
 		// remove red from colors using its index.
-		colors.splice(redIndex, 1);
+		let colorsClone = colors.slice();
+		colorsClone.splice(redIndex, 1);
 
-		let selectedColors = colors.map((c) => c.color);
+		let selectedColors = colorsClone.map((c) => c.color);
 		selectedColors.forEach((color) => user.findByTestId(`${color}`).click());
 
 		user.findByTestId('message').should('have.text', 'All red Items');
@@ -75,9 +76,10 @@ describe('functionality of the shape filter', () => {
 
 		let redIndex = colors.findIndex((c) => c.name === 'red');
 		// remove red from colors using its index.
-		colors.splice(redIndex, 1);
+		let colorsClone = colors.slice();
+		colorsClone.splice(redIndex, 1);
 
-		let selectedColors = colors.map((c) => c.color);
+		let selectedColors = colorsClone.map((c) => c.color);
 		selectedColors.forEach((color) => user.findByTestId(`${color}`).click());
 
 		user.findByTestId('message').should('have.text', 'Multiple red Items');
@@ -104,9 +106,11 @@ describe('functionality of the shape filter', () => {
 
 		let redIndex = colors.findIndex((c) => c.name === 'red');
 		// remove red from colors using its index.
-		colors.splice(redIndex, 1);
+		let colorsClone = colors.slice();
 
-		let selectedColors = colors.map((c) => c.color);
+		colorsClone.splice(redIndex, 1);
+
+		let selectedColors = colorsClone.map((c) => c.color);
 		selectedColors.forEach((color) => user.findByTestId(`${color}`).click());
 
 		user.findByTestId('message').should('have.text', 'Oval red items');
