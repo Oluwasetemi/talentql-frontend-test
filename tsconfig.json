@@ -14,7 +14,15 @@
 		"isolatedModules": true,
 		"noEmit": true,
 		"jsx": "react",
-		"types": ["jest", "react", "react-dom", "styled-components"]
+		"types": [
+			"jest",
+			"react",
+			"react-dom",
+			"styled-components",
+			"cypress",
+			"@testing-library/react",
+			"@testing-library/cypress"
+		]
 	},
 	"include": ["./src", "svg-transform.js"],
 	"exclude": ["node_modules/**/*.(js|ts|tsx)"],

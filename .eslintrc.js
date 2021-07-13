@@ -21,6 +21,7 @@ module.exports = {
 		'import',
 		'@typescript-eslint',
 		'prettier',
+		'eslint-plugin-cypress',
 	],
 	settings: {
 		react: {
@@ -50,8 +51,6 @@ module.exports = {
 					'**/*test.*',
 					'**/tests/**/*',
 					'**/build/**/*',
-					`packages/fields/src/**/filterTests.*`,
-					'**/test-fixtures.*',
 				],
 			},
 		],
@@ -129,7 +128,7 @@ module.exports = {
 			},
 		],
 	},
-	extends: ['plugin:jest/recommended'],
+	extends: ['plugin:jest/recommended', 'plugin:cypress/recommended'],
 
 	// Disable some rules for (code blocks within) Markdown docs
 	overrides: [

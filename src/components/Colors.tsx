@@ -65,7 +65,7 @@ export function ColorsFilter({
 	React.useEffect(() => {
 		if (selectedColors.length === 1) {
 			let current = document.querySelector('div.current') as HTMLElement;
-			current?.addEventListener(
+			current.addEventListener(
 				'click',
 				() => {
 					setTimeout(() => {

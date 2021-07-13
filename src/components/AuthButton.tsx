@@ -10,6 +10,7 @@ export function AuthButton() {
 		<p>
 			Welcome!{' '}
 			<button
+				data-testid="signout"
 				onClick={() => {
 					auth!.signout(() => history.push('/'));
 				}}
