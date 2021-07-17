@@ -25,6 +25,6 @@
 		]
 	},
 	"include": ["./src", "svg-transform.js"],
-	"exclude": ["node_modules/**/*.(js|ts|tsx)"],
+	"exclude": ["node_modules/**/*.(js|ts|tsx)", "vite-env.d.ts"],
 	"typeRoots": ["node_modules/@types"]
 }

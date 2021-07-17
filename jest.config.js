@@ -2,8 +2,12 @@ module.exports = {
 	roots: ['<rootDir>/src'],
 	preset: 'ts-jest',
 	// testEnvironment: 'js-dom',
-	collectCoverageFrom: ['handlers/**/*.ts', 'src/*'],
-	coveragePathIgnorePatterns: ['<rootDir>/node_modules', 'src/filter.json'],
+	collectCoverageFrom: ['**/*.ts', '!src/__tests__', '**/*.{ts,tsx}'],
+	coveragePathIgnorePatterns: [
+		'<rootDir>/node_modules',
+		'src/filter.json',
+		'vite-env.d.ts',
+	],
 	coverageReporters: ['json', 'text', 'lcov', 'clover'],
 	coverageThreshold: {
 		global: {
@@ -15,7 +19,7 @@ module.exports = {
 	},
 	transform: {
 		'^.+\\.svg$': '<rootDir>/svg-transform.js',
-		'.ts': '<rootDir>/node_modules/ts-jest/preprocessor.js',
+		'.ts|tsx': '<rootDir>/node_modules/ts-jest/preprocessor.js',
 	},
 	testEnvironment: 'jest-environment-jsdom-sixteen',
 	watchPlugins: [
