@@ -1,6 +1,8 @@
 import * as React from 'react';
 import { Circle, Ellipse, Rectangle, Triangle } from 'react-shapes';
 import styled from 'styled-components';
+import { useAppDispatch, useAppSelector } from '../store/hooks';
+import { checkShape, resetShapes, unCheckShape } from '../store/shape';
 
 export const ShapesContainer = styled.div`
 	display: flex;
@@ -74,19 +76,14 @@ export function OvalShape({ color }: { color: string }) {
 	return <Ellipse rx={50} ry={70} fill={{ color: color }} />;
 }
 
-export function ShapesFilter({
-	shapes,
-	selectedShapes,
-	setSelectedShapes,
-}: {
-	shapes: Array<string>;
-	selectedShapes: string[];
-	setSelectedShapes: React.Dispatch<React.SetStateAction<string[]>>;
-}) {
+export function ShapesFilter() {
 	// const [isActive, setActive] = React.useState(false);
+	const shapes = useAppSelector((state) => state.shape.shapes);
+	const selectedShape = useAppSelector((state) => state.shape.selectedShapes);
+	const dispatch = useAppDispatch();
 
 	function isChecked(shape: string) {
-		return selectedShapes.includes(shape);
+		return selectedShape.includes(shape);
 	}
 
 	const handleOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -96,26 +93,24 @@ export function ShapesFilter({
 		// console.log(checked);
 
 		// eslint-disable-next-line no-unused-expressions
-		isChecked(name)
-			? setSelectedShapes(selectedShapes.filter((shape) => shape !== name))
-			: setSelectedShapes([...selectedShapes, name]);
+		isChecked(name) ? dispatch(unCheckShape(name)) : dispatch(checkShape(name));
 		// console.log(selectedShapes);
 	};
 
 	React.useEffect(() => {
-		if (selectedShapes.length === 1) {
+		if (selectedShape.length === 1) {
 			let current = document.querySelector('button.current') as HTMLElement;
 			current?.addEventListener(
 				'click',
 				() => {
 					setTimeout(() => {
-						setSelectedShapes(shapes);
+						dispatch(resetShapes());
 					}, 0);
 				},
 				{ once: true },
 			);
 		}
-	}, [selectedShapes]);
+	}, [selectedShape]);
 
 	return (
 		<ShapesContainer className="shapes">

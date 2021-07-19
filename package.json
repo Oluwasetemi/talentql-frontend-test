@@ -56,7 +56,7 @@
 		"stylelint-processor-styled-components": "^1.10.0",
 		"ts-jest": "23.10.0",
 		"typescript": "^3.9.10",
-		"vite": "^2.3.8"
+		"vite": "2.3.8"
 	},
 	"prettier": {
 		"singleQuote": true,
