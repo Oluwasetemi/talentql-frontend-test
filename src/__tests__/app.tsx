@@ -1,10 +1,12 @@
 import { cleanup, fireEvent, render } from '@testing-library/react';
 import 'jest-styled-components';
 import * as React from 'react';
+import { Provider } from 'react-redux';
 import App from '../App';
 import { authContext } from '../context/authContext';
 import { colors, shapes } from '../filter.json';
 import { useProvideAuth } from '../hooks/useProviderAuth';
+import store from '../store';
 
 // FIX: there are a lot of repitition in this test. Move the repeated lines in to a function
 afterEach(() => cleanup);
@@ -28,7 +30,9 @@ function HomeApp() {
 	// auth.signin(() => console.log('login'));
 	return (
 		<authContext.Provider value={auth}>
-			<App />
+			<Provider store={store}>
+				<App />
+			</Provider>
 		</authContext.Provider>
 	);
 }

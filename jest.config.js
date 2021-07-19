@@ -1,8 +1,6 @@
 module.exports = {
-	roots: ['<rootDir>/src'],
-	preset: 'ts-jest',
-	// testEnvironment: 'js-dom',
-	collectCoverageFrom: ['**/*.ts', '!src/__tests__', '**/*.{ts,tsx}'],
+	testEnvironment: 'jsdom',
+	collectCoverageFrom: ['**/*.ts', '!src/__tests__', '**/*.(ts,tsx)'],
 	coveragePathIgnorePatterns: [
 		'<rootDir>/node_modules',
 		'src/filter.json',
@@ -19,9 +17,8 @@ module.exports = {
 	},
 	transform: {
 		'^.+\\.svg$': '<rootDir>/svg-transform.js',
-		'.ts|tsx': '<rootDir>/node_modules/ts-jest/preprocessor.js',
+		'\\.[jt]sx?$': 'babel-jest',
 	},
-	testEnvironment: 'jest-environment-jsdom-sixteen',
 	watchPlugins: [
 		'jest-watch-typeahead/filename',
 		'jest-watch-typeahead/testname',
