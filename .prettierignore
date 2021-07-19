@@ -5,3 +5,4 @@ coverage
 # Ignore all HTML files:
 # *.html
 dist/
+cypress/fixtures
