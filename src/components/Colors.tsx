@@ -1,5 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
+import { checkColor, resetColors, unCheckColor } from '../store/color';
+import { useAppDispatch, useAppSelector } from '../store/hooks';
 
 export const ColorContainer = styled.div`
 	/* height: 50px; */
@@ -41,15 +43,14 @@ export const ColorItem = styled.div`
 	}
 `;
 
-export function ColorsFilter({
-	selectedColors,
-	setSelectedColors,
-	colorTypes,
-}: {
-	selectedColors: Array<string>;
-	colorTypes: Array<string>;
-	setSelectedColors: (s: string[]) => void;
-}) {
+export function ColorsFilter() {
+	const colors = useAppSelector((state) => state.color.colors).map(
+		(color) => color.color,
+	);
+	const selectedColors = useAppSelector((state) => state.color.selectedColors);
+
+	const dispatch = useAppDispatch();
+
 	function isChecked(color: string) {
 		return selectedColors.includes(color);
 	}
@@ -57,9 +58,7 @@ export function ColorsFilter({
 	const handleOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
 		const name = event.target.name;
 		// eslint-disable-next-line no-unused-expressions
-		isChecked(name)
-			? setSelectedColors(selectedColors.filter((color) => color !== name))
-			: setSelectedColors([...selectedColors, name]);
+		isChecked(name) ? dispatch(unCheckColor(name)) : dispatch(checkColor(name));
 	};
 
 	React.useEffect(() => {
@@ -69,7 +68,7 @@ export function ColorsFilter({
 				'click',
 				() => {
 					setTimeout(() => {
-						setSelectedColors(colorTypes);
+						dispatch(resetColors());
 					}, 0);
 				},
 				{ once: true },
@@ -79,7 +78,7 @@ export function ColorsFilter({
 
 	return (
 		<ColorContainer>
-			{colorTypes.map((color, index) => (
+			{colors.map((color, index) => (
 				<ColorItem
 					key={index}
 					className={isChecked(color) ? 'current' : ''}
