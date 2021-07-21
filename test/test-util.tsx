@@ -1,6 +1,4 @@
 /* eslint-disable import/no-extraneous-dependencies */
-// test-utils.jsx
-/* eslint-ignore */
 // Import your own reducer
 import { configureStore } from '@reduxjs/toolkit';
 import {
@@ -15,8 +13,10 @@ import { useProvideAuth } from '../src/hooks/useProviderAuth';
 import colorReducer from '../src/store/color';
 import shapeReducer from '../src/store/shape';
 
+/* eslint-disable @typescript-eslint/no-unused-vars */
+// @ts-ignore
 type RenderResultModified = {
-	[k in keyof RenderResult<Queries, HTMLElement>]: RenderResult[k];
+	[k in keyof RenderResult<Queries, HTMLElement>]: RenderResult;
 };
 
 function render(

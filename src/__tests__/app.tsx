@@ -3,9 +3,7 @@ import '@testing-library/jest-dom/extend-expect';
 import {
 	cleanup,
 	fireEvent,
-	Queries,
 	render as rtlRender,
-	RenderResult,
 } from '@testing-library/react';
 import 'jest-styled-components';
 import * as React from 'react';
@@ -45,10 +43,6 @@ function HomeApp() {
 		</authContext.Provider>
 	);
 }
-
-type RenderResultModified = {
-	[k in keyof RenderResult<Queries, HTMLElement>]: RenderResult[k];
-};
 
 // function render(
 // 	ui: JSX.Element,
