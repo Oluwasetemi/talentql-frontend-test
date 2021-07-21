@@ -1,10 +1,10 @@
 module.exports = {
 	testEnvironment: 'jsdom',
-	collectCoverageFrom: ['**/*.ts', '!src/__tests__', '**/*.(ts,tsx)'],
 	coveragePathIgnorePatterns: [
 		'<rootDir>/node_modules',
 		'src/filter.json',
 		'vite-env.d.ts',
+		'cypress',
 	],
 	coverageReporters: ['json', 'text', 'lcov', 'clover'],
 	coverageThreshold: {
@@ -23,4 +23,5 @@ module.exports = {
 		'jest-watch-typeahead/filename',
 		'jest-watch-typeahead/testname',
 	],
+	setupFilesAfterEnv: ['<rootDir>/test/setup-env.ts'],
 };

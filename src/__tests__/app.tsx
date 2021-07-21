@@ -1,7 +1,16 @@
-import { cleanup, fireEvent, render } from '@testing-library/react';
+// TODO: fix type issues in the test-utils.tsx file
+import '@testing-library/jest-dom/extend-expect';
+import {
+	cleanup,
+	fireEvent,
+	Queries,
+	render as rtlRender,
+	RenderResult,
+} from '@testing-library/react';
 import 'jest-styled-components';
 import * as React from 'react';
 import { Provider } from 'react-redux';
+import { render } from '../../test/test-util';
 import App from '../App';
 import { authContext } from '../context/authContext';
 import { colors, shapes } from '../filter.json';
@@ -9,7 +18,7 @@ import { useProvideAuth } from '../hooks/useProviderAuth';
 import store from '../store';
 
 // FIX: there are a lot of repitition in this test. Move the repeated lines in to a function
-afterEach(() => cleanup);
+afterEach(cleanup);
 
 const mockUseLocationValue = {
 	pathname: '/',
@@ -37,9 +46,41 @@ function HomeApp() {
 	);
 }
 
+type RenderResultModified = {
+	[k in keyof RenderResult<Queries, HTMLElement>]: RenderResult[k];
+};
+
+// function render(
+// 	ui: JSX.Element,
+// 	{
+// 		initialState,
+// 		s = configureStore({
+// 			reducer: { color: colorReducer, shape: shapeReducer },
+// 			preloadedState: initialState,
+// 		}),
+// 		...options
+// 	}: any = {},
+// ): RenderResultModified | { s: any } {
+// 	// configure the store
+// 	function Wrapper({ children }: { children: JSX.ElementChildrenAttribute }) {
+// 		const auth = useProvideAuth();
+
+// 		return (
+// 			<authContext.Provider value={auth}>
+// 				<Provider store={s}>{children}</Provider>
+// 			</authContext.Provider>
+// 		);
+// 	}
+
+// 	return {
+// 		...rtlRender(ui, { wrapper: Wrapper, ...options }),
+// 		s,
+// 	};
+// }
+
 describe('<App />', () => {
 	test('should login with hardcode authentication details', async () => {
-		const { getByTestId, findByText } = render(<HomeApp />);
+		const { getByTestId, findByText } = render(<App />);
 		const input = getByTestId(/login/i);
 		await fireEvent.click(input);
 		let welcome = await findByText(/welcome/i, { selector: 'p' });
@@ -47,7 +88,7 @@ describe('<App />', () => {
 	});
 
 	test('All shapes should be selected initially', async () => {
-		const { getByTestId, findByText, getAllByTestId } = render(<HomeApp />);
+		const { getByTestId, findByText, getAllByTestId } = rtlRender(<HomeApp />);
 		const input = getByTestId(/login/i);
 		await fireEvent.click(input);
 		await findByText(/welcome/i, { selector: 'p' });
@@ -59,7 +100,7 @@ describe('<App />', () => {
 	});
 
 	test('All colors should be selected initially', async () => {
-		const { getByTestId, findByText, getAllByTestId } = render(<HomeApp />);
+		const { getByTestId, findByText, getAllByTestId } = rtlRender(<HomeApp />);
 		const input = getByTestId(/login/i);
 		await fireEvent.click(input);
 		await findByText(/welcome/i, { selector: 'p' });
@@ -71,7 +112,7 @@ describe('<App />', () => {
 	});
 
 	test('Multiple filters can be selected (differentiate the states - ) - shapes', async () => {
-		const { getByTestId, findByText, findByTestId } = render(<HomeApp />);
+		const { getByTestId, findByText, findByTestId } = rtlRender(<HomeApp />);
 		const input = getByTestId(/login/i);
 		await fireEvent.click(input);
 		await findByText(/welcome/i, { selector: 'p' });
@@ -83,11 +124,12 @@ describe('<App />', () => {
 	});
 
 	test('Multiple filters can be selected (differentiate the states - ) - colors', async () => {
-		const { getByTestId, findByText, findByTestId } = render(<HomeApp />);
+		const { getByTestId, findByText, findByTestId } = render(<App />);
 		const input = getByTestId(/login/i);
 		await fireEvent.click(input);
 		await findByText(/welcome/i, { selector: 'p' });
 		const message = findByTestId(/message/i);
+
 		expect((await message).textContent).toEqual('All Items');
 		const red = colors.find((color) => color.name === 'red');
 		// console.log(red);
@@ -106,7 +148,7 @@ describe('<App />', () => {
 			findByTestId,
 			getAllByTestId,
 			findAllByTestId,
-		} = render(<HomeApp />);
+		} = render(<App />);
 		const input = getByTestId(/login/i);
 		await fireEvent.click(input);
 		await findByText(/welcome/i, { selector: 'p' });
@@ -139,7 +181,7 @@ describe('<App />', () => {
 			findByTestId,
 			getAllByTestId,
 			findAllByTestId,
-		} = render(<HomeApp />);
+		} = render(<App />);
 		const input = getByTestId(/login/i);
 		await fireEvent.click(input);
 		await findByText(/welcome/i, { selector: 'p' });
@@ -168,7 +210,7 @@ describe('<App />', () => {
 
 	// gird title
 	test('When all the colors and shapes are selected: “All items: ”', async () => {
-		const { getByTestId, findByText, findByTestId } = render(<HomeApp />);
+		const { getByTestId, findByText, findByTestId } = render(<App />);
 		const input = getByTestId(/login/i);
 		await fireEvent.click(input);
 		await findByText(/welcome/i, { selector: 'p' });
@@ -177,7 +219,7 @@ describe('<App />', () => {
 	});
 
 	test('When all the colors and a multiple shapes or all the shapes and multiple colors are selected: “Multiple items: ”', async () => {
-		const { getByTestId, findByText, findByTestId } = render(<HomeApp />);
+		const { getByTestId, findByText, findByTestId } = render(<App />);
 		const input = getByTestId(/login/i);
 		await fireEvent.click(input);
 		await findByText(/welcome/i, { selector: 'p' });
@@ -197,7 +239,7 @@ describe('<App />', () => {
 	// NB if that changes test may break
 	test('When all the shapes and a single color is selected: “All red items: ”', async () => {
 		const { getByTestId, findByText, findByTestId, getAllByTestId } = render(
-			<HomeApp />,
+			<App />,
 		);
 		const input = getByTestId(/login/i);
 		await fireEvent.click(input);
@@ -218,7 +260,7 @@ describe('<App />', () => {
 	// NB if that changes test may break
 	test('When all the colors and single shape is selected: “All oval items: ', async () => {
 		const { getByTestId, findByText, findByTestId, getAllByTestId } = render(
-			<HomeApp />,
+			<App />,
 		);
 		const input = getByTestId(/login/i);
 		await fireEvent.click(input);
@@ -237,7 +279,7 @@ describe('<App />', () => {
 
 	test('When multiple shapes and a single color is selected: “Multiple red items "', async () => {
 		const { getByTestId, findByText, findByTestId, getAllByTestId } = render(
-			<HomeApp />,
+			<App />,
 		);
 		const input = getByTestId(/login/i);
 		await fireEvent.click(input);
@@ -267,7 +309,7 @@ describe('<App />', () => {
 
 	test('When multiple the colors and single shape is selected: “Multiple oval items"', async () => {
 		const { getByTestId, findByText, findByTestId, getAllByTestId } = render(
-			<HomeApp />,
+			<App />,
 		);
 		const input = getByTestId(/login/i);
 		await fireEvent.click(input);
@@ -278,7 +320,7 @@ describe('<App />', () => {
 		const colorCheckBox = getAllByTestId(/color-checkbox/i);
 		expect(colorCheckBox.length).toEqual(colors.length);
 		// remove the first checkBox assumed to be red color
-		colorCheckBox.slice(3).forEach(async (each) => {
+		colorCheckBox.slice(3).forEach(async (each: any) => {
 			await fireEvent.click(each as HTMLInputElement);
 			// expect(each.hasAttribute('checked')).toBeTruthy();
 		});
@@ -287,7 +329,7 @@ describe('<App />', () => {
 		const shapeCheckbox = getAllByTestId(/shape-checkbox/i);
 		expect(shapeCheckbox.length).toEqual(shapes.length);
 		// remove the first checkBox assumed to be oval shape
-		shapeCheckbox.slice(1).forEach(async (each) => {
+		shapeCheckbox.slice(1).forEach(async (each: any) => {
 			await fireEvent.click(each as HTMLInputElement);
 			// expect(each.hasAttribute('checked')).toBeTruthy();
 		});
@@ -297,7 +339,7 @@ describe('<App />', () => {
 
 	test('When a single color and single shape is selected: “Round oval items"', async () => {
 		const { getByTestId, findByText, findByTestId, getAllByTestId } = render(
-			<HomeApp />,
+			<App />,
 		);
 		const input = getByTestId(/login/i);
 		await fireEvent.click(input);
@@ -308,7 +350,7 @@ describe('<App />', () => {
 		const colorCheckBox = getAllByTestId(/color-checkbox/i);
 		expect(colorCheckBox.length).toEqual(colors.length);
 		// remove the first checkBox assumed to be red color
-		colorCheckBox.slice(1).forEach(async (each) => {
+		colorCheckBox.slice(1).forEach(async (each: any) => {
 			await fireEvent.click(each as HTMLInputElement);
 			// expect(each.hasAttribute('checked')).toBeTruthy();
 		});
@@ -317,14 +359,12 @@ describe('<App />', () => {
 		const shapeCheckbox = getAllByTestId(/shape-checkbox/i);
 		expect(shapeCheckbox.length).toEqual(shapes.length);
 		// remove the first checkBox assumed to be oval shape
-		shapeCheckbox.slice(1).forEach(async (each) => {
+		shapeCheckbox.slice(1).forEach(async (each: any) => {
 			await fireEvent.click(each as HTMLInputElement);
 			// expect(each.hasAttribute('checked')).toBeTruthy();
 		});
 
-		expect((await message).textContent).toMatchInlineSnapshot(
-			'',
-			`"Oval red items"`,
-		);
+		// debug(await message);
+		expect(await message).toHaveTextContent('Oval red items');
 	});
 });
