@@ -20,7 +20,7 @@
 		"test:e2e:run": "run-p -r dev cy:run",
 		"test:e2e:dev": "npm-run-all --parallel dev cy:open",
 		"prepare": "husky install",
-		"lintstaged": "npx lintstaged"
+		"lintstaged": "lint-staged"
 	},
 	"dependencies": {
 		"@reduxjs/toolkit": "^1.6.0",
