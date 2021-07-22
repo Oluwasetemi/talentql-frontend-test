@@ -1,4 +1,3 @@
-// TODO: fix type issues in the test-utils.tsx file
 import '@testing-library/jest-dom/extend-expect';
 import {
 	cleanup,
@@ -327,6 +326,7 @@ describe('<App />', () => {
 			await fireEvent.click(each as HTMLInputElement);
 			// expect(each.hasAttribute('checked')).toBeTruthy();
 		});
+		// console.log(s.getState().shape.selectedShapes);
 
 		expect((await message).textContent).toBe('Multiple Oval Items');
 	});

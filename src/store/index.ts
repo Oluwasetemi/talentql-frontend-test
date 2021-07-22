@@ -1,6 +1,6 @@
-import { configureStore } from '@reduxjs/toolkit';
-import colorReducer from './color';
-import shapeReducer from './shape';
+import { AnyAction, configureStore, EnhancedStore } from '@reduxjs/toolkit';
+import colorReducer, { colorState } from './color';
+import shapeReducer, { shapeState } from './shape';
 
 const store = configureStore({
 	reducer: {
@@ -9,6 +9,11 @@ const store = configureStore({
 	},
 });
 export default store;
+
+export type StoreType = EnhancedStore<
+	{ color: colorState; shape: shapeState },
+	AnyAction
+>;
 
 export type RootState = ReturnType<typeof store.getState>;
 
