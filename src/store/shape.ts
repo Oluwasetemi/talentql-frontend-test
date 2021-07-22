@@ -9,7 +9,8 @@ export type shapeState = {
 	shapes: typeof shapes;
 	selectedShapes: typeof shapes;
 };
-const initialState: shapeState = {
+
+export const initialState: shapeState = {
 	shapes,
 	selectedShapes: shapes,
 };

@@ -13,7 +13,7 @@ export type colorState = {
 
 const colorTypes = colors.map((color) => color.color);
 
-const initialState: colorState = {
+export const initialState: colorState = {
 	colors,
 	selectedColors: [...colorTypes],
 };

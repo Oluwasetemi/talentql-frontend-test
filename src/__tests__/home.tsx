@@ -1,9 +1,11 @@
 import { render } from '@testing-library/react';
 import 'jest-styled-components';
 import * as React from 'react';
+import { Provider } from 'react-redux';
 import Home from '../components/Home';
 import { authContext } from '../context/authContext';
 import { useProvideAuth } from '../hooks/useProviderAuth';
+import store from '../store';
 
 const mockUseLocationValue = {
 	pathname: '/',
@@ -24,7 +26,9 @@ function HomeApp() {
 	auth.signin(() => console.log('login'));
 	return (
 		<authContext.Provider value={auth}>
-			<Home />
+			<Provider store={store}>
+				<Home />
+			</Provider>
 		</authContext.Provider>
 	);
 }
