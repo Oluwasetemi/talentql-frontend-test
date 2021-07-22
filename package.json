@@ -13,7 +13,7 @@
 		"test:coverage": "yarn test:unit --coverage",
 		"test:watch": "yarn test:unit --watch",
 		"test:unit": "jest --passWithNoTests",
-		"test:all": "run-p -r test test:e2e",
+		"test:all": "run-s test test:e2e",
 		"test": "is-ci \"test:coverage\" \"test:watch\" ",
 		"cy:run": "cypress run",
 		"cy:open": "cypress open",
