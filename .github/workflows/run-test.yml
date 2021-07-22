@@ -8,4 +8,5 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - run: yarn config set ignore-scripts false && yarn test:all
+      - run: |
+          yarn config set ignore-scripts false && yarn && yarn test:all
