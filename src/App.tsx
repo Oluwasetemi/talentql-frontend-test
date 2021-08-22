@@ -60,6 +60,9 @@ const router: () => any = (): any => {
 					<PrivateRoute path="/">
 						<ColorDashboard />
 					</PrivateRoute>
+					<Route path="*">
+						<Login />
+					</Route>
 				</Switch>
 			</Router>
 		</ProvideAuth>
