@@ -54,10 +54,10 @@ const router: () => any = (): any => {
 		<ProvideAuth>
 			<Router>
 				<Switch>
-					<Route path="/login">
+					<Route exact path="/login">
 						<Login />
 					</Route>
-					<PrivateRoute path="/">
+					<PrivateRoute exact path="/">
 						<ColorDashboard />
 					</PrivateRoute>
 					<Route path="*">
