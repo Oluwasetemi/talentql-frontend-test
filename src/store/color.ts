@@ -31,8 +31,6 @@ export const colorSlice = createSlice({
 		},
 		checkColor(colors, action: PayloadAction<string>) {
 			colors.selectedColors.push(action.payload);
-
-			colors.selectedColors.push();
 		},
 		unCheckColor(colors, action) {
 			// console.log(action);

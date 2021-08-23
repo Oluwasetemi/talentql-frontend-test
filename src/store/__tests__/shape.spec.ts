@@ -1,7 +1,7 @@
 import configureStore from '../index';
 import { checkShape, resetShapes, unCheckShape } from '../shape';
 
-describe('colorSlice', () => {
+describe('shapeSlice', () => {
 	let store: typeof configureStore;
 	beforeEach(() => {
 		// fakeAxios = new MockAdapter(axios);
