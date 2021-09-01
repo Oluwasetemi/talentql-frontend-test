@@ -16,6 +16,7 @@ export function Login(): JSX.Element {
 			history.replace(from);
 		});
 	};
+
 	return (
 		<>
 			<Nav />

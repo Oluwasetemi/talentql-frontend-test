@@ -1,6 +1,5 @@
 import * as React from 'react';
 import styled from 'styled-components';
-// import { colors as rawColorsX, shapes as rawShapesX } from '../filter.json';
 import { useAppSelector } from '../store/hooks';
 import {
 	CircleShape,
@@ -43,6 +42,7 @@ export function RenderBox() {
 				<OvalShape color={color} />
 			</BoxContainer>
 		));
+
 	let circleShape = () =>
 		selectedShapes.includes('Round') &&
 		selectedColors.map((color) => (
@@ -50,6 +50,7 @@ export function RenderBox() {
 				<CircleShape color={color} />
 			</BoxContainer>
 		));
+
 	let triangleShape = () =>
 		selectedShapes.includes('Triangle') &&
 		selectedColors.map((color) => (
@@ -57,6 +58,7 @@ export function RenderBox() {
 				<TriangleShape color={color} />
 			</BoxContainer>
 		));
+
 	let squareShape = () =>
 		selectedShapes.includes('Square') &&
 		selectedColors.map((color) => (
@@ -64,6 +66,7 @@ export function RenderBox() {
 				<SquareShape color={color} />
 			</BoxContainer>
 		));
+
 	let rectangleShape = () =>
 		selectedShapes.includes('Rectangle') &&
 		selectedColors.map((color) => (

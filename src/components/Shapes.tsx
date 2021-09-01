@@ -77,7 +77,6 @@ export function OvalShape({ color }: { color: string }) {
 }
 
 export function ShapesFilter() {
-	// const [isActive, setActive] = React.useState(false);
 	const shapes = useAppSelector((state) => state.shape.shapes);
 	const selectedShape = useAppSelector((state) => state.shape.selectedShapes);
 	const dispatch = useAppDispatch();
@@ -88,18 +87,15 @@ export function ShapesFilter() {
 
 	const handleOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
 		const name = event.target.name;
-		// console.log(name);
-		// const checked = isChecked(name);
-		// console.log(checked);
 
 		// eslint-disable-next-line no-unused-expressions
 		isChecked(name) ? dispatch(unCheckShape(name)) : dispatch(checkShape(name));
-		// console.log(selectedShapes);
 	};
 
 	React.useEffect(() => {
 		if (selectedShape.length === 1) {
 			let current = document.querySelector('button.current') as HTMLElement;
+
 			current?.addEventListener(
 				'click',
 				() => {

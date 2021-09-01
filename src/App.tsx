@@ -6,7 +6,7 @@ import {
 	Switch,
 } from 'react-router-dom';
 import styled from 'styled-components';
-import ColorDashboard from './components/Home';
+import Dashboard from './components/Home';
 import { Login } from './components/Login';
 import { ProvideAuth } from './context/authContext';
 import { useAuth } from './hooks/useAuth';
@@ -58,7 +58,7 @@ const router: () => any = (): any => {
 						<Login />
 					</Route>
 					<PrivateRoute exact path="/">
-						<ColorDashboard />
+						<Dashboard />
 					</PrivateRoute>
 					<Redirect from="*" to="login" />
 				</Switch>
