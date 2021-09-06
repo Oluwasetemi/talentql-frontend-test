@@ -1,3 +1,4 @@
+import { ToastProvider } from '@keystone-ui/toast';
 import * as React from 'react';
 import {
 	BrowserRouter as Router,
@@ -51,19 +52,21 @@ function PrivateRoute({ children, ...rest }: any) {
 
 const router: () => any = (): any => {
 	return (
-		<ProvideAuth>
-			<Router>
-				<Switch>
-					<Route exact path="/login">
-						<Login />
-					</Route>
-					<PrivateRoute exact path="/">
-						<Dashboard />
-					</PrivateRoute>
-					<Redirect from="*" to="login" />
-				</Switch>
-			</Router>
-		</ProvideAuth>
+		<ToastProvider>
+			<ProvideAuth>
+				<Router>
+					<Switch>
+						<Route exact path="/login">
+							<Login />
+						</Route>
+						<PrivateRoute exact path="/">
+							<Dashboard />
+						</PrivateRoute>
+						<Redirect from="*" to="login" />
+					</Switch>
+				</Router>
+			</ProvideAuth>
+		</ToastProvider>
 	);
 };
 

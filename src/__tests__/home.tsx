@@ -1,3 +1,4 @@
+import { ToastProvider } from '@keystone-ui/toast';
 import { render } from '@testing-library/react';
 import 'jest-styled-components';
 import * as React from 'react';
@@ -25,11 +26,13 @@ function HomeApp() {
 	const auth = useProvideAuth();
 	auth.signin(() => console.log('login'));
 	return (
-		<authContext.Provider value={auth}>
-			<Provider store={store}>
-				<Home />
-			</Provider>
-		</authContext.Provider>
+		<ToastProvider>
+			<authContext.Provider value={auth}>
+				<Provider store={store}>
+					<Home />
+				</Provider>
+			</authContext.Provider>
+		</ToastProvider>
 	);
 }
 

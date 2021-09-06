@@ -1,3 +1,4 @@
+import { useToasts } from '@keystone-ui/toast';
 import React from 'react';
 import styled from 'styled-components';
 import { checkColor, resetColors, unCheckColor } from '../store/color';
@@ -44,6 +45,7 @@ export const ColorItem = styled.div`
 `;
 
 export function ColorsFilter() {
+	const { addToast } = useToasts();
 	const colors = useAppSelector((state) => state.color.colors).map(
 		(color) => color.color,
 	);
@@ -58,7 +60,13 @@ export function ColorsFilter() {
 	const handleOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
 		const name = event.target.name;
 		// eslint-disable-next-line no-unused-expressions
-		isChecked(name) ? dispatch(unCheckColor(name)) : dispatch(checkColor(name));
+		if (isChecked(name)) {
+			dispatch(unCheckColor(name));
+			addToast({ title: `${name} color unchecked`, tone: 'positive' });
+		} else {
+			dispatch(checkColor(name));
+			addToast({ title: `${name} color checked`, tone: 'negative' });
+		}
 	};
 
 	React.useEffect(() => {

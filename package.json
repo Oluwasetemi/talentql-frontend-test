@@ -24,6 +24,7 @@
 		"lintstaged": "lint-staged"
 	},
 	"dependencies": {
+		"@keystone-ui/toast": "^4.0.2",
 		"@reduxjs/toolkit": "^1.6.0",
 		"react": "^17.0.0",
 		"react-dom": "^17.0.0",

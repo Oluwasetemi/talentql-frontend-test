@@ -1,3 +1,4 @@
+import { useToasts } from '@keystone-ui/toast';
 import * as React from 'react';
 import { Circle, Ellipse, Rectangle, Triangle } from 'react-shapes';
 import styled from 'styled-components';
@@ -77,6 +78,7 @@ export function OvalShape({ color }: { color: string }) {
 }
 
 export function ShapesFilter() {
+	const { addToast } = useToasts();
 	const shapes = useAppSelector((state) => state.shape.shapes);
 	const selectedShape = useAppSelector((state) => state.shape.selectedShapes);
 	const dispatch = useAppDispatch();
@@ -89,7 +91,13 @@ export function ShapesFilter() {
 		const name = event.target.name;
 
 		// eslint-disable-next-line no-unused-expressions
-		isChecked(name) ? dispatch(unCheckShape(name)) : dispatch(checkShape(name));
+		if (isChecked(name)) {
+			dispatch(unCheckShape(name));
+			addToast({ title: `${name} shape unchecked`, tone: 'positive' });
+		} else {
+			dispatch(checkShape(name));
+			addToast({ title: `${name} shape unchecked`, tone: 'positive' });
+		}
 	};
 
 	React.useEffect(() => {
