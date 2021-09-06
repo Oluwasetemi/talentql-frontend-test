@@ -26,9 +26,6 @@ export const colorSlice = createSlice({
 	name: 'Colors',
 	initialState,
 	reducers: {
-		isChecked(colors, action) {
-			colors.selectedColors.includes(action.payload);
-		},
 		checkColor(colors, action: PayloadAction<string>) {
 			colors.selectedColors.push(action.payload);
 		},
@@ -46,6 +43,5 @@ export const colorSlice = createSlice({
 	},
 });
 
-export const { isChecked, checkColor, unCheckColor, resetColors } =
-	colorSlice.actions;
+export const { checkColor, unCheckColor, resetColors } = colorSlice.actions;
 export default colorSlice.reducer;

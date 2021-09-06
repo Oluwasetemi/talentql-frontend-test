@@ -20,6 +20,7 @@ export function useProvideAuth() {
 
 	return {
 		user,
+		setUser,
 		signin,
 		signout,
 	};

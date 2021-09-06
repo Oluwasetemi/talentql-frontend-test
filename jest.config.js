@@ -5,6 +5,7 @@ module.exports = {
 		'src/filter.json',
 		'vite-env.d.ts',
 		'cypress',
+		'test-util.tsx',
 	],
 	coverageReporters: ['json', 'text', 'lcov', 'clover'],
 	coverageThreshold: {

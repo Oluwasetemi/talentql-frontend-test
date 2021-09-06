@@ -9,7 +9,7 @@
 		"lint:types": "tsc",
 		"lint:css": "stylelint './src/**/*.(ts|tsx)'",
 		"lint": "yarn lint:prettier && yarn lint:eslint && yarn lint:types && yarn lint:css",
-		"validate": "yarn lint && yarn test:unit",
+		"validate": "yarn lint && yarn test:unit -u",
 		"test:coverage": "yarn test:unit --coverage",
 		"test:watch": "yarn test:unit --watch",
 		"test:unit": "jest --passWithNoTests",
@@ -32,7 +32,8 @@
 		"react-router-dom": "^5.2.0",
 		"react-select": "^4.3.1",
 		"react-shapes": "^0.1.0",
-		"styled-components": "^5.3.0"
+		"styled-components": "^5.3.0",
+		"waait": "^1.0.5"
 	},
 	"devDependencies": {
 		"@babel/core": "^7.14.6",
