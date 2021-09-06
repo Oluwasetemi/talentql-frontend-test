@@ -93,10 +93,14 @@ export function ShapesFilter() {
 		// eslint-disable-next-line no-unused-expressions
 		if (isChecked(name)) {
 			dispatch(unCheckShape(name));
-			addToast({ title: `${name} shape unchecked`, tone: 'positive' });
+			if (!('Cypress' in window)) {
+				addToast({ title: `${name} shape unchecked`, tone: 'positive' });
+			}
 		} else {
 			dispatch(checkShape(name));
-			addToast({ title: `${name} shape unchecked`, tone: 'positive' });
+			if (!('Cypress' in window)) {
+				addToast({ title: `${name} shape unchecked`, tone: 'positive' });
+			}
 		}
 	};
 

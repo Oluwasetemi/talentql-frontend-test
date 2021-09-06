@@ -62,10 +62,14 @@ export function ColorsFilter() {
 		// eslint-disable-next-line no-unused-expressions
 		if (isChecked(name)) {
 			dispatch(unCheckColor(name));
-			addToast({ title: `${name} color unchecked`, tone: 'positive' });
+			if (!('Cypress' in window)) {
+				addToast({ title: `${name} color unchecked`, tone: 'positive' });
+			}
 		} else {
 			dispatch(checkColor(name));
-			addToast({ title: `${name} color checked`, tone: 'negative' });
+			if (!('Cypress' in window)) {
+				addToast({ title: `${name} color checked`, tone: 'negative' });
+			}
 		}
 	};
 

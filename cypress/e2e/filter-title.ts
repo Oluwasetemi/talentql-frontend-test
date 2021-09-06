@@ -63,7 +63,9 @@ describe('functionality of the shape filter', () => {
 		// single shape
 		const withOutOval = shapes.filter((shape) => shape !== 'Oval');
 
-		withOutOval.forEach((shape) => user.findByText(`${shape}`).click());
+		withOutOval.forEach((shape) =>
+			user.findByText(`${shape}`).click({ force: true }),
+		);
 
 		user.findByTestId('message').should('have.text', 'All Oval Items');
 	});
@@ -85,11 +87,15 @@ describe('functionality of the shape filter', () => {
 		user.findByTestId('message').should('have.text', 'Multiple red Items');
 	});
 
-	it('When multiple  colors and single shape is selected: “Multiple oval items:”', () => {
+	it('When multiple colors and single shape is selected: “Multiple oval items:”', () => {
 		// single shape
 		const withOutOval = shapes.filter((shape) => shape !== 'Oval');
 
-		withOutOval.forEach((shape) => user.findByText(`${shape}`).click());
+		withOutOval.forEach((shape) =>
+			user.findByText(`${shape}`).click({
+				force: true,
+			}),
+		);
 
 		colors
 			.slice(3)
@@ -102,7 +108,9 @@ describe('functionality of the shape filter', () => {
 		// single shape
 		const withOutOval = shapes.filter((shape) => shape !== 'Oval');
 
-		withOutOval.forEach((shape) => user.findByText(`${shape}`).click());
+		withOutOval.forEach((shape) =>
+			user.findByText(`${shape}`).click({ force: true }),
+		);
 
 		let redIndex = colors.findIndex((c) => c.name === 'red');
 		// remove red from colors using its index.

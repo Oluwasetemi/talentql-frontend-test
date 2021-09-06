@@ -13,8 +13,11 @@ describe('functionality of the shape filter', () => {
 		user.findAllByTestId(/shape-checkbox/).each(($el, index, $list) => {
 			if (index != 4) {
 				user.wrap($el.parent()).click();
-				user.wrap($el).should('not.be.checked');
+				// user.wait(200);
+				user.wrap($el[0]).should('not.be.checked');
 			} else {
+				console.log($el);
+				console.log(index);
 				user.wrap($el).click({ force: true });
 				user.wait(200);
 				user.wrap($list).each(($el) => {
