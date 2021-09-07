@@ -7,6 +7,7 @@ import {
 import 'jest-styled-components';
 import * as React from 'react';
 import { Provider } from 'react-redux';
+import { ToastContainer } from 'react-toastify';
 import { render } from '../../test/test-util';
 import App from '../App';
 import { authContext } from '../context/authContext';
@@ -35,11 +36,24 @@ function HomeApp() {
 	const auth = useProvideAuth();
 	// auth.signin(() => console.log('login'));
 	return (
-		<authContext.Provider value={auth}>
-			<Provider store={store}>
-				<App />
-			</Provider>
-		</authContext.Provider>
+		<>
+			<ToastContainer
+				position="top-right"
+				autoClose={500}
+				hideProgressBar={false}
+				newestOnTop={false}
+				closeOnClick
+				rtl={false}
+				pauseOnFocusLoss
+				draggable
+				pauseOnHover
+			/>
+			<authContext.Provider value={auth}>
+				<Provider store={store}>
+					<App />
+				</Provider>
+			</authContext.Provider>
+		</>
 	);
 }
 
@@ -72,6 +86,21 @@ function HomeApp() {
 // }
 
 describe('<App />', () => {
+	beforeAll(() => {
+		Object.defineProperty(window, 'matchMedia', {
+			writable: true,
+			value: jest.fn().mockImplementation((query) => ({
+				matches: false,
+				media: query,
+				onchange: null,
+				addListener: jest.fn(), // Deprecated
+				removeListener: jest.fn(), // Deprecated
+				addEventListener: jest.fn(),
+				removeEventListener: jest.fn(),
+				dispatchEvent: jest.fn(),
+			})),
+		});
+	});
 	test('should login with hardcode authentication details', async () => {
 		const { getByTestId, findByText } = render(<App />);
 		const input = getByTestId(/login/i);

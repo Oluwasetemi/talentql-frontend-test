@@ -1,5 +1,5 @@
-import { useToasts } from '@keystone-ui/toast';
 import React from 'react';
+import { toast } from 'react-toastify';
 import styled from 'styled-components';
 import { checkColor, resetColors, unCheckColor } from '../store/color';
 import { useAppDispatch, useAppSelector } from '../store/hooks';
@@ -45,7 +45,6 @@ export const ColorItem = styled.div`
 `;
 
 export function ColorsFilter() {
-	const { addToast } = useToasts();
 	const colors = useAppSelector((state) => state.color.colors).map(
 		(color) => color.color,
 	);
@@ -63,12 +62,12 @@ export function ColorsFilter() {
 		if (isChecked(name)) {
 			dispatch(unCheckColor(name));
 			if (!('Cypress' in window)) {
-				addToast({ title: `${name} color unchecked`, tone: 'positive' });
+				toast(`${name} color unchecked`);
 			}
 		} else {
 			dispatch(checkColor(name));
 			if (!('Cypress' in window)) {
-				addToast({ title: `${name} color checked`, tone: 'negative' });
+				toast(`${name} color checked`);
 			}
 		}
 	};

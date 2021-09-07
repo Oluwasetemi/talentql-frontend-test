@@ -1,5 +1,5 @@
-import { useToasts } from '@keystone-ui/toast';
 import * as React from 'react';
+import { toast } from 'react-toastify';
 import styled from 'styled-components';
 import { useAppSelector } from '../store/hooks';
 import {
@@ -26,7 +26,6 @@ export const BoxWrapper = styled.div`
 `;
 
 export function RenderBox() {
-	const { addToast } = useToasts();
 	const selectedColors = useAppSelector((state) => state.color.selectedColors);
 	const selectedShapes = useAppSelector((state) => state.shape.selectedShapes);
 
@@ -83,65 +82,37 @@ export function RenderBox() {
 
 		if (allColors && allShapes) {
 			setMessage('All Items');
-			addToast({
-				title: `All Items`,
-				message: 'All of the shapes and colors are checked',
-				tone: 'positive',
-			});
+			toast(`All Items`);
 		} else if (allShapes && selectedColors.length === 1) {
 			const foundColor = rawColorsX.find(
 				(color) => color.color === selectedColors[0],
 			);
 			setMessage(`All ${foundColor!.name} Items`);
-			addToast({
-				title: `All ${foundColor!.name} Items`,
-				message: 'All of the colors are checked',
-				tone: 'positive',
-			});
+			toast(`All ${foundColor!.name} Items`);
 		} else if (allColors && selectedShapes.length === 1) {
 			setMessage(`All ${selectedShapes[0]} Items`);
-			addToast({
-				title: `All ${selectedShapes[0]} Items`,
-				message: `${selectedShapes[0]} shapes selected`,
-				tone: 'positive',
-			});
+			toast(`All ${selectedShapes[0]} Items`);
 		} else if (selectedShapes.length > 1 && selectedColors.length === 1) {
 			const foundColor = rawColorsX.find(
 				(color) => color.color === selectedColors[0],
 			);
 			setMessage(`Multiple ${foundColor!.name} Items`);
-			addToast({
-				title: `All ${foundColor!.name} Items`,
-				message: 'All of the colors are checked',
-				tone: 'positive',
-			});
+			toast(`All ${foundColor!.name} Items`);
 		} else if (selectedColors.length > 1 && selectedShapes.length === 1) {
 			setMessage(`Multiple ${selectedShapes} Items`);
-			addToast({
-				title: `All ${selectedShapes} Items`,
-				message: `${selectedShapes} shapes selected`,
-				tone: 'positive',
-			});
+			toast(`${selectedShapes} shapes selected`);
 		} else if (selectedColors.length === 1 && selectedShapes.length === 1) {
 			const foundColor = rawColorsX.find(
 				(color) => color.color === selectedColors[0],
 			);
 			setMessage(`${selectedShapes[0]} ${foundColor?.name} items`);
-			addToast({
-				title: `${selectedShapes[0]} ${foundColor!.name} Items`,
-				message: `${selectedShapes[0]} ${foundColor!.name} Items are selected`,
-				tone: 'positive',
-			});
+			toast(`${selectedShapes[0]} ${foundColor!.name} Items`);
 		} else if (
 			(allColors && selectedShapes.length < rawShapesX.length) ||
 			(allShapes && selectedColors.length < rawColorsX.length)
 		) {
 			setMessage('Multiple Items');
-			addToast({
-				title: `Multiple Items`,
-				message: `Multiple Items of shapes and colors are selected`,
-				tone: 'positive',
-			});
+			toast(`Multiple Items`);
 		}
 	}, [selectedColors, selectedShapes, message]);
 

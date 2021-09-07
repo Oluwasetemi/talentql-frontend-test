@@ -1,4 +1,3 @@
-import { ToastProvider } from '@keystone-ui/toast';
 import * as React from 'react';
 import {
 	BrowserRouter as Router,
@@ -6,6 +5,8 @@ import {
 	Route,
 	Switch,
 } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import styled from 'styled-components';
 import Dashboard from './components/Home';
 import { Login } from './components/Login';
@@ -52,21 +53,19 @@ function PrivateRoute({ children, ...rest }: any) {
 
 const router: () => any = (): any => {
 	return (
-		<ToastProvider>
-			<ProvideAuth>
-				<Router>
-					<Switch>
-						<Route exact path="/login">
-							<Login />
-						</Route>
-						<PrivateRoute exact path="/">
-							<Dashboard />
-						</PrivateRoute>
-						<Redirect from="*" to="login" />
-					</Switch>
-				</Router>
-			</ProvideAuth>
-		</ToastProvider>
+		<ProvideAuth>
+			<Router>
+				<Switch>
+					<Route exact path="/login">
+						<Login />
+					</Route>
+					<PrivateRoute exact path="/">
+						<Dashboard />
+					</PrivateRoute>
+					<Redirect from="*" to="login" />
+				</Switch>
+			</Router>
+		</ProvideAuth>
 	);
 };
 
@@ -91,7 +90,22 @@ export const AppWrapper = styled.div`
 `;
 
 function App(): React.ReactElement<any> {
-	return router();
+	return (
+		<>
+			<ToastContainer
+				position="top-right"
+				autoClose={500}
+				hideProgressBar={false}
+				newestOnTop={false}
+				closeOnClick
+				rtl={false}
+				pauseOnFocusLoss
+				draggable
+				pauseOnHover
+			/>
+			{router()}
+		</>
+	);
 }
 
 export default App;
