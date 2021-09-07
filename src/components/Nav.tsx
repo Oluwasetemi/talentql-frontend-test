@@ -43,6 +43,7 @@ export function Nav() {
 						auth!.signout(() => history.push('/'));
 					}}
 					className="logout"
+					data-testid="logout"
 				>
 					logout <img src={logout} alt="logout" />
 				</span>
@@ -52,6 +53,8 @@ export function Nav() {
 						auth!.signin(() => history.replace(from));
 					}}
 					className="logout"
+					data-testid="signin"
+					role="button"
 				>
 					login
 				</span>
