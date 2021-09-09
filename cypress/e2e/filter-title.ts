@@ -13,11 +13,13 @@
 // 7: When a single color and single shape is selected: “Round oval items:”
 
 import { colors, shapes } from '../../src/filter.json';
+
 describe('functionality of the shape filter', () => {
 	const user = cy;
 	beforeEach(() => {
 		user.visit('/').contains(/login/).click().wait(10);
 	});
+
 	it('When all the colors and shapes are selected: “All items:”', () => {
 		user.findAllByTestId(/shape-checkbox/).each(($el) => {
 			user.wrap($el).should('be.checked');

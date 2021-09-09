@@ -3,6 +3,7 @@
 // - Multiple filters can be selected (differentiate the states)
 
 // - Deselecting the last filter should select all filters
+// export {};
 
 describe('functionality of the shape filter', () => {
 	const user = cy;

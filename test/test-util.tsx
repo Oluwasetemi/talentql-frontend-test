@@ -8,15 +8,19 @@ import { ToastContainer } from 'react-toastify';
 import { authContext } from '../src/context/authContext';
 import { useProvideAuth } from '../src/hooks/useProviderAuth';
 import { RootState } from '../src/store';
-import colorReducer from '../src/store/color';
-import shapeReducer from '../src/store/shape';
+import colorReducer, {
+	initialState as initialStateColor,
+} from '../src/store/color';
+import shapeReducer, {
+	initialState as initialStateShape,
+} from '../src/store/shape';
 
 type RenderResultModified = ReturnType<typeof rtlRender> & { store: RootState };
 
 function render(
 	ui: JSX.Element,
 	{
-		initialState,
+		initialState = { color: initialStateColor, shape: initialStateShape },
 		store = configureStore({
 			reducer: { color: colorReducer, shape: shapeReducer },
 			preloadedState: initialState,
