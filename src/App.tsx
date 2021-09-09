@@ -8,10 +8,10 @@ import {
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import styled from 'styled-components';
-import Dashboard from './pages/Home';
-import { Login } from './pages/Login';
 import { ProvideAuth } from './context/authContext';
 import { useAuth } from './hooks/useAuth';
+import Dashboard from './pages/Home';
+import { Login } from './pages/Login';
 
 function PrivateRoute({ children, ...rest }: any) {
 	const auth = useAuth();
