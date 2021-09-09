@@ -8,4 +8,9 @@ export default defineConfig({
 	server: {
 		port: 7779,
 	},
+	esbuild: {
+		jsxFactory: '_jsx',
+		jsxFragment: '_jsxFragment',
+		jsxInject: `import { createElement as _jsx, Fragment as _jsxFragment } from 'react'`,
+	},
 });

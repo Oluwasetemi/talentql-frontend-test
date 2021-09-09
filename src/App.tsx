@@ -8,30 +8,14 @@ import {
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import styled from 'styled-components';
-import Dashboard from './components/Home';
-import { Login } from './components/Login';
+import Dashboard from './pages/Home';
+import { Login } from './pages/Login';
 import { ProvideAuth } from './context/authContext';
 import { useAuth } from './hooks/useAuth';
 
-export const fakeAuth = {
-	username: 'admin',
-	password: 'password',
-	isAuthenticated: false,
-
-	signin(cb: () => void) {
-		if (fakeAuth.username == 'admin' && fakeAuth.password == 'password') {
-			fakeAuth.isAuthenticated = true;
-			setTimeout(cb, 100); // fake async
-		}
-	},
-	signout(cb: () => void) {
-		fakeAuth.isAuthenticated = false;
-		setTimeout(cb, 100);
-	},
-};
-
 function PrivateRoute({ children, ...rest }: any) {
 	const auth = useAuth();
+
 	return (
 		<Route
 			{...rest}

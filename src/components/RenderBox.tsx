@@ -8,7 +8,7 @@ import {
 	RectangleShape,
 	SquareShape,
 	TriangleShape,
-} from './Shapes';
+} from '../util';
 
 export const BoxContainer = styled.div`
 	width: 200px;

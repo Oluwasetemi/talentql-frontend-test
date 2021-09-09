@@ -15,9 +15,6 @@ import { colors, shapes } from '../filter.json';
 import { useProvideAuth } from '../hooks/useProviderAuth';
 import store from '../store';
 
-// FIX: there are a lot of repitition in this test. Move the repeated lines in to a function
-afterEach(cleanup);
-
 const mockUseLocationValue = {
 	pathname: '/',
 	search: '',
@@ -57,34 +54,6 @@ function HomeApp() {
 	);
 }
 
-// function render(
-// 	ui: JSX.Element,
-// 	{
-// 		initialState,
-// 		s = configureStore({
-// 			reducer: { color: colorReducer, shape: shapeReducer },
-// 			preloadedState: initialState,
-// 		}),
-// 		...options
-// 	}: any = {},
-// ): RenderResultModified | { s: any } {
-// 	// configure the store
-// 	function Wrapper({ children }: { children: JSX.ElementChildrenAttribute }) {
-// 		const auth = useProvideAuth();
-
-// 		return (
-// 			<authContext.Provider value={auth}>
-// 				<Provider store={s}>{children}</Provider>
-// 			</authContext.Provider>
-// 		);
-// 	}
-
-// 	return {
-// 		...rtlRender(ui, { wrapper: Wrapper, ...options }),
-// 		s,
-// 	};
-// }
-
 describe('<App />', () => {
 	beforeAll(() => {
 		Object.defineProperty(window, 'matchMedia', {
@@ -101,6 +70,9 @@ describe('<App />', () => {
 			})),
 		});
 	});
+	// FIX: there are a lot of repitition in this test. Move the repeated lines in to a function
+	afterEach(cleanup);
+
 	test('should login with hardcode authentication details', async () => {
 		const { getByTestId, findByText } = render(<App />);
 		const input = getByTestId(/login/i);

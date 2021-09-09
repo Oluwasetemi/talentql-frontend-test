@@ -3,9 +3,9 @@ import 'jest-styled-components';
 import * as React from 'react';
 import { Provider } from 'react-redux';
 import { ToastContainer } from 'react-toastify';
-import Home from '../components/Home';
 import { authContext } from '../context/authContext';
 import { useProvideAuth } from '../hooks/useProviderAuth';
+import Home from '../pages/Home';
 import store from '../store';
 
 const mockUseLocationValue = {
@@ -24,7 +24,7 @@ jest.mock('react-router-dom', () => ({
 
 function HomeApp() {
 	const auth = useProvideAuth();
-	auth.signin(() => console.log('login'));
+
 	return (
 		<>
 			<ToastContainer

@@ -3,6 +3,7 @@ import { toast } from 'react-toastify';
 import styled from 'styled-components';
 import { checkColor, resetColors, unCheckColor } from '../store/color';
 import { useAppDispatch, useAppSelector } from '../store/hooks';
+import { isChecked } from '../util';
 
 export const ColorContainer = styled.div`
 	/* height: 50px; */
@@ -52,14 +53,10 @@ export function ColorsFilter() {
 
 	const dispatch = useAppDispatch();
 
-	function isChecked(color: string) {
-		return selectedColors.includes(color);
-	}
-
 	const handleOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
 		const name = event.target.name;
 		// eslint-disable-next-line no-unused-expressions
-		if (isChecked(name)) {
+		if (isChecked(name, selectedColors)) {
 			dispatch(unCheckColor(name));
 			if (!('Cypress' in window)) {
 				toast(`${name} color unchecked`);
@@ -92,7 +89,7 @@ export function ColorsFilter() {
 			{colors.map((color, index) => (
 				<ColorItem
 					key={index}
-					className={isChecked(color) ? 'current' : ''}
+					className={isChecked(color, selectedColors) ? 'current' : ''}
 					color={color}
 					data-testid={color}
 				>
@@ -101,7 +98,7 @@ export function ColorsFilter() {
 						type="checkbox"
 						name={color}
 						id={color}
-						checked={isChecked(color)}
+						checked={isChecked(color, selectedColors)}
 						onChange={handleOnChange}
 					/>
 					<label htmlFor={color} style={{ backgroundColor: `${color}` }} />

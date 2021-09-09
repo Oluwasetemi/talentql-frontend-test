@@ -14,18 +14,22 @@ export const NavBar = styled.header`
 	height: 45px;
 	span {
 		display: flex;
+
+		&.logout {
+			cursor: pointer;
+			color: red;
+		}
 	}
-	.logo {
-		text-transform: uppercase;
-	}
-	span img {
+
+	img {
 		/* margin-bottom: 10px; */
 		height: 20px;
 		align-content: center;
 		margin-left: 10px;
 	}
-	.logout {
-		color: red;
+
+	.logo {
+		text-transform: uppercase;
 	}
 `;
 
