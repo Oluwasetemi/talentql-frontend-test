@@ -15,6 +15,9 @@ module.exports = {
 			statements: 90,
 		},
 	},
+	moduleNameMapper: {
+		'\\.(css|less)$': 'identity-obj-proxy',
+	},
 	transform: {
 		'^.+\\.svg$': '<rootDir>/svg-transform.js',
 		'\\.[jt]sx?$': 'babel-jest',
@@ -23,5 +26,8 @@ module.exports = {
 		'jest-watch-typeahead/filename',
 		'jest-watch-typeahead/testname',
 	],
-	setupFilesAfterEnv: ['<rootDir>/test/setup-env.ts'],
+	setupFilesAfterEnv: [
+		'<rootDir>/test/setup-env.ts',
+		'<rootDir>/test/matchMedia.mock.js',
+	],
 };

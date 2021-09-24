@@ -1,5 +1,21 @@
 import React from 'react';
-import { fakeAuth } from '../App';
+
+export const fakeAuth = {
+	username: 'admin',
+	password: 'password',
+	isAuthenticated: false,
+
+	signin(cb: () => void) {
+		if (fakeAuth.username == 'admin' && fakeAuth.password == 'password') {
+			fakeAuth.isAuthenticated = true;
+			setTimeout(cb, 100); // fake async
+		}
+	},
+	signout(cb: () => void) {
+		fakeAuth.isAuthenticated = false;
+		setTimeout(cb, 100);
+	},
+};
 
 export function useProvideAuth() {
 	const [user, setUser] = React.useState<string | null>(null);
@@ -20,6 +36,7 @@ export function useProvideAuth() {
 
 	return {
 		user,
+		setUser,
 		signin,
 		signout,
 	};

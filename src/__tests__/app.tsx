@@ -7,6 +7,7 @@ import {
 import 'jest-styled-components';
 import * as React from 'react';
 import { Provider } from 'react-redux';
+import { ToastContainer } from 'react-toastify';
 import { render } from '../../test/test-util';
 import App from '../App';
 import { authContext } from '../context/authContext';
@@ -32,15 +33,43 @@ function HomeApp() {
 	const auth = useProvideAuth();
 
 	return (
-		<authContext.Provider value={auth}>
-			<Provider store={store}>
-				<App />
-			</Provider>
-		</authContext.Provider>
+		<>
+			<ToastContainer
+				position="top-right"
+				autoClose={500}
+				hideProgressBar={false}
+				newestOnTop={false}
+				closeOnClick
+				rtl={false}
+				pauseOnFocusLoss
+				draggable
+				pauseOnHover
+			/>
+			<authContext.Provider value={auth}>
+				<Provider store={store}>
+					<App />
+				</Provider>
+			</authContext.Provider>
+		</>
 	);
 }
 
 describe('<App />', () => {
+	beforeAll(() => {
+		Object.defineProperty(window, 'matchMedia', {
+			writable: true,
+			value: jest.fn().mockImplementation((query) => ({
+				matches: false,
+				media: query,
+				onchange: null,
+				addListener: jest.fn(), // Deprecated
+				removeListener: jest.fn(), // Deprecated
+				addEventListener: jest.fn(),
+				removeEventListener: jest.fn(),
+				dispatchEvent: jest.fn(),
+			})),
+		});
+	});
 	// FIX: there are a lot of repitition in this test. Move the repeated lines in to a function
 	afterEach(cleanup);
 
@@ -200,7 +229,7 @@ describe('<App />', () => {
 		expect((await message).textContent).toEqual('All Items');
 	});
 
-	test('When all the colors and a multiple shapes or all the shapes and multiple colors are selected: “Multiple items: ”', async () => {
+	test('When all the colors and multiple shapes or all the shapes and multiple colors are selected: “Multiple items: ”', async () => {
 		const { getByTestId, findByText, findByTestId } = render(<App />);
 		const input = getByTestId(/login/i);
 		fireEvent.click(input);

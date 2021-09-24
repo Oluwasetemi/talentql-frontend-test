@@ -4,6 +4,7 @@ import { configureStore } from '@reduxjs/toolkit';
 import { render as rtlRender } from '@testing-library/react';
 import React, { PropsWithChildren } from 'react';
 import { Provider } from 'react-redux';
+import { ToastContainer } from 'react-toastify';
 import { authContext } from '../src/context/authContext';
 import { useProvideAuth } from '../src/hooks/useProviderAuth';
 import { RootState } from '../src/store';
@@ -32,9 +33,22 @@ function render(
 		const auth = useProvideAuth();
 
 		return (
-			<authContext.Provider value={auth}>
-				<Provider store={store}>{children}</Provider>
-			</authContext.Provider>
+			<>
+				<ToastContainer
+					position="top-right"
+					autoClose={500}
+					hideProgressBar={false}
+					newestOnTop={false}
+					closeOnClick
+					rtl={false}
+					pauseOnFocusLoss
+					draggable
+					pauseOnHover
+				/>
+				<authContext.Provider value={auth}>
+					<Provider store={store}>{children}</Provider>
+				</authContext.Provider>
+			</>
 		);
 	}
 

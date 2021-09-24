@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { toast } from 'react-toastify';
 import styled from 'styled-components';
 import { useAppSelector } from '../store/hooks';
 import {
@@ -7,7 +8,7 @@ import {
 	RectangleShape,
 	SquareShape,
 	TriangleShape,
-} from './Shapes';
+} from '../util';
 
 export const BoxContainer = styled.div`
 	width: 200px;
@@ -81,30 +82,37 @@ export function RenderBox() {
 
 		if (allColors && allShapes) {
 			setMessage('All Items');
+			toast(`All Items`);
 		} else if (allShapes && selectedColors.length === 1) {
 			const foundColor = rawColorsX.find(
 				(color) => color.color === selectedColors[0],
 			);
 			setMessage(`All ${foundColor!.name} Items`);
+			toast(`All ${foundColor!.name} Items`);
 		} else if (allColors && selectedShapes.length === 1) {
 			setMessage(`All ${selectedShapes[0]} Items`);
+			toast(`All ${selectedShapes[0]} Items`);
 		} else if (selectedShapes.length > 1 && selectedColors.length === 1) {
 			const foundColor = rawColorsX.find(
 				(color) => color.color === selectedColors[0],
 			);
 			setMessage(`Multiple ${foundColor!.name} Items`);
+			toast(`All ${foundColor!.name} Items`);
 		} else if (selectedColors.length > 1 && selectedShapes.length === 1) {
 			setMessage(`Multiple ${selectedShapes} Items`);
+			toast(`${selectedShapes} shapes selected`);
 		} else if (selectedColors.length === 1 && selectedShapes.length === 1) {
 			const foundColor = rawColorsX.find(
 				(color) => color.color === selectedColors[0],
 			);
 			setMessage(`${selectedShapes[0]} ${foundColor?.name} items`);
+			toast(`${selectedShapes[0]} ${foundColor!.name} Items`);
 		} else if (
 			(allColors && selectedShapes.length < rawShapesX.length) ||
 			(allShapes && selectedColors.length < rawColorsX.length)
 		) {
 			setMessage('Multiple Items');
+			toast(`Multiple Items`);
 		}
 	}, [selectedColors, selectedShapes, message]);
 

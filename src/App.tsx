@@ -5,31 +5,17 @@ import {
 	Route,
 	Switch,
 } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import styled from 'styled-components';
-import Dashboard from './components/Home';
-import { Login } from './components/Login';
 import { ProvideAuth } from './context/authContext';
 import { useAuth } from './hooks/useAuth';
-
-export const fakeAuth = {
-	username: 'admin',
-	password: 'password',
-	isAuthenticated: false,
-
-	signin(cb: () => void) {
-		if (fakeAuth.username == 'admin' && fakeAuth.password == 'password') {
-			fakeAuth.isAuthenticated = true;
-			setTimeout(cb, 100); // fake async
-		}
-	},
-	signout(cb: () => void) {
-		fakeAuth.isAuthenticated = false;
-		setTimeout(cb, 100);
-	},
-};
+import Dashboard from './pages/Home';
+import { Login } from './pages/Login';
 
 function PrivateRoute({ children, ...rest }: any) {
 	const auth = useAuth();
+
 	return (
 		<Route
 			{...rest}
@@ -88,7 +74,22 @@ export const AppWrapper = styled.div`
 `;
 
 function App(): React.ReactElement<any> {
-	return router();
+	return (
+		<>
+			<ToastContainer
+				position="top-right"
+				autoClose={500}
+				hideProgressBar={false}
+				newestOnTop={false}
+				closeOnClick
+				rtl={false}
+				pauseOnFocusLoss
+				draggable
+				pauseOnHover
+			/>
+			{router()}
+		</>
+	);
 }
 
 export default App;

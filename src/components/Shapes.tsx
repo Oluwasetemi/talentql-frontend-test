@@ -1,8 +1,9 @@
 import * as React from 'react';
-import { Circle, Ellipse, Rectangle, Triangle } from 'react-shapes';
+import { toast } from 'react-toastify';
 import styled from 'styled-components';
 import { useAppDispatch, useAppSelector } from '../store/hooks';
 import { checkShape, resetShapes, unCheckShape } from '../store/shape';
+import { isChecked } from '../util';
 
 export const ShapesContainer = styled.div`
 	display: flex;
@@ -56,40 +57,26 @@ export const SingleShapeButton = styled.button`
 	}
 `;
 
-export function SquareShape({ color }: { color: string }) {
-	return <Rectangle width={100} height={100} fill={{ color: color }} />;
-}
-
-export function RectangleShape({ color }: { color: string }) {
-	return <Rectangle width={100} height={70} fill={{ color: color }} />;
-}
-
-export function CircleShape({ color }: { color: string }) {
-	return <Circle r={50} fill={{ color: color }} />;
-}
-
-export function TriangleShape({ color }: { color: string }) {
-	return <Triangle width={80} height={100} fill={{ color: color }} />;
-}
-
-export function OvalShape({ color }: { color: string }) {
-	return <Ellipse rx={50} ry={70} fill={{ color: color }} />;
-}
-
 export function ShapesFilter() {
 	const shapes = useAppSelector((state) => state.shape.shapes);
 	const selectedShape = useAppSelector((state) => state.shape.selectedShapes);
 	const dispatch = useAppDispatch();
 
-	function isChecked(shape: string) {
-		return selectedShape.includes(shape);
-	}
-
 	const handleOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
 		const name = event.target.name;
 
 		// eslint-disable-next-line no-unused-expressions
-		isChecked(name) ? dispatch(unCheckShape(name)) : dispatch(checkShape(name));
+		if (isChecked(name, selectedShape)) {
+			dispatch(unCheckShape(name));
+			if (!('Cypress' in window)) {
+				toast(`${name} shape unchecked`);
+			}
+		} else {
+			dispatch(checkShape(name));
+			if (!('Cypress' in window)) {
+				toast(`${name} shape unchecked`);
+			}
+		}
 	};
 
 	React.useEffect(() => {
@@ -112,7 +99,7 @@ export function ShapesFilter() {
 		<ShapesContainer className="shapes">
 			{shapes.map((shape, index) => (
 				<SingleShapeButton
-					className={isChecked(shape) ? 'current' : ''}
+					className={isChecked(shape, selectedShape) ? 'current' : ''}
 					key={index}
 				>
 					<input
@@ -120,7 +107,7 @@ export function ShapesFilter() {
 						type="checkbox"
 						name={shape}
 						id={shape}
-						checked={isChecked(shape)}
+						checked={isChecked(shape, selectedShape)}
 						onChange={handleOnChange}
 					/>
 					<label htmlFor={shape}>{shape}</label>

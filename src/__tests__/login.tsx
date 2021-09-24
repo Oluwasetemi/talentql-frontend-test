@@ -1,9 +1,9 @@
 import { fireEvent, render } from '@testing-library/react';
 import 'jest-styled-components';
 import * as React from 'react';
-import { Login } from '../components/Login';
 import { authContext } from '../context/authContext';
 import { useProvideAuth } from '../hooks/useProviderAuth';
+import { Login } from '../pages/Login';
 
 const mockUseLocationValue = {
 	pathname: '/login',

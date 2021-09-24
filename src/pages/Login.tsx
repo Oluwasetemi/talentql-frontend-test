@@ -1,9 +1,8 @@
 import * as React from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
-import { AppWrapper } from '../App';
+import { AuthButton } from '../components/AuthButton';
+import { Navigation } from '../components/Navigation';
 import { useAuth } from '../hooks/useAuth';
-import { AuthButton } from './AuthButton';
-import { Nav } from './Nav';
 
 export function Login(): JSX.Element {
 	let history = useHistory();
@@ -11,6 +10,7 @@ export function Login(): JSX.Element {
 	let auth = useAuth();
 
 	let { from } = (location.state as any) || { from: { pathname: '/' } };
+
 	let login = () => {
 		auth!.signin(() => {
 			history.replace(from);
@@ -18,18 +18,13 @@ export function Login(): JSX.Element {
 	};
 
 	return (
-		<>
-			<Nav />
-			<div className="App-body">
-				<AppWrapper>
-					<AuthButton />
-					<h3>Login</h3>
-					<p>You must log in to view the page at {from.pathname}</p>
-					<button data-testid="login" onClick={login}>
-						Log in
-					</button>
-				</AppWrapper>
-			</div>
-		</>
+		<Navigation>
+			<AuthButton />
+			<h3>Login</h3>
+			<p>You must log in to view the Color and Shape filters</p>
+			<button data-testid="login" onClick={login}>
+				Log in
+			</button>
+		</Navigation>
 	);
 }

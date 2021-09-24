@@ -9,7 +9,7 @@
 		"lint:types": "tsc",
 		"lint:css": "stylelint './src/**/*.(ts|tsx)'",
 		"lint": "yarn lint:prettier && yarn lint:eslint && yarn lint:types && yarn lint:css",
-		"validate": "yarn lint && yarn test:unit",
+		"validate": "yarn lint && yarn test:unit -u",
 		"test:coverage": "yarn test:unit --coverage",
 		"test:watch": "yarn test:unit --watch",
 		"test:unit": "jest --passWithNoTests",
@@ -32,6 +32,7 @@
 		"react-router-dom": "^5.2.0",
 		"react-select": "^4.3.1",
 		"react-shapes": "^0.1.0",
+		"react-toastify": "^8.0.2",
 		"styled-components": "^5.3.0",
 		"waait": "^1.0.5"
 	},
@@ -79,8 +80,8 @@
 		"stylelint-config-recommended": "^5.0.0",
 		"stylelint-config-styled-components": "^0.1.1",
 		"stylelint-processor-styled-components": "^1.10.0",
-		"typescript": "^3.9.10",
-		"vite": "2.3.8"
+		"typescript": "^4.4",
+		"vite": "2.5.6"
 	},
 	"prettier": {
 		"singleQuote": true,
