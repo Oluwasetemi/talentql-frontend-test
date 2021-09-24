@@ -21,6 +21,7 @@ export const BoxContainer = styled.div`
 export const BoxWrapper = styled.div`
 	padding-left: 5px;
 	display: flex;
+	justify-content: center;
 	flex-wrap: wrap;
 	gap: 10px;
 `;

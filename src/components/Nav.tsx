@@ -6,7 +6,7 @@ import logout from '../logout.svg';
 
 export const NavBar = styled.header`
 	background: #fff;
-	width: 85%;
+	width: 90%;
 	margin: 0 auto;
 	display: flex;
 	justify-content: space-between;

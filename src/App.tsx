@@ -69,7 +69,7 @@ export interface Filter {
 }
 
 export const AppWrapper = styled.div`
-	width: 85%;
+	width: 90%;
 	margin: auto;
 `;
 
